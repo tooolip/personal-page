@@ -1,0 +1,163 @@
+/* Paper theme. drawably draws the chrome; this file sets the surface it sits on. */
+
+:root {
+  /* Ink + paper. drawably reads these custom properties directly. */
+  --drawably-stroke: #27354d;
+  --drawably-fill: #27354d;
+  --drawably-paper: #fbf7ec;
+
+  --ink: #27354d;
+  --ink-soft: #5d6a80;
+  --paper: #fbf7ec;
+  --rule: rgba(39, 53, 77, 0.14);
+
+  --measure: 34rem;
+  --pen: "Drawably Pen", ui-rounded, "Comic Sans MS", cursive;
+  --body: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+/* Toned paper rather than a glaring white sheet at night. */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --drawably-stroke: #e8dfc9;
+    --drawably-fill: #e8dfc9;
+    --drawably-paper: #22201c;
+
+    --ink: #e8dfc9;
+    --ink-soft: #a89f8b;
+    --paper: #22201c;
+    --rule: rgba(232, 223, 201, 0.16);
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Grain. One inline SVG turbulence, no image request. */
+.paper {
+  position: relative;
+  min-height: 100vh;
+  padding: clamp(2rem, 7vw, 5.5rem) 1.25rem;
+}
+
+.paper::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.5;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.22'/%3E%3C/svg%3E");
+}
+
+@media (prefers-color-scheme: dark) {
+  .paper::before {
+    mix-blend-mode: screen;
+    opacity: 0.28;
+  }
+}
+
+.sheet {
+  position: relative;
+  z-index: 1;
+  max-width: var(--measure);
+  margin: 0 auto;
+}
+
+/* Masthead */
+.name {
+  font-family: var(--pen);
+  font-weight: 400;
+  font-size: clamp(2.6rem, 11vw, 4.25rem);
+  line-height: 1.05;
+  margin: 0 0 0.35em;
+  letter-spacing: 0.01em;
+}
+
+.tagline {
+  margin: 0;
+  font-size: 1.15rem;
+  color: var(--ink-soft);
+  text-wrap: pretty;
+}
+
+hr {
+  border: 0;
+  height: 1px;
+  background: transparent;
+  margin: clamp(2rem, 6vw, 3rem) 0;
+}
+
+/* Blocks */
+.block {
+  margin: clamp(2rem, 6vw, 3rem) 0;
+}
+
+.block h2 {
+  font-family: var(--pen);
+  font-weight: 400;
+  font-size: 1.6rem;
+  margin: 0 0 0.5em;
+}
+
+.block p {
+  margin: 0 0 1em;
+  text-wrap: pretty;
+}
+
+#work-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+#work-list li {
+  margin: 0 0 0.6em;
+}
+
+/* Links get a pen underline on hover rather than a browser rule. */
+a {
+  color: inherit;
+  text-decoration-color: var(--rule);
+  text-underline-offset: 0.22em;
+  text-decoration-thickness: 1px;
+}
+
+a:hover {
+  text-decoration-color: currentColor;
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+}
+
+.colophon {
+  margin-top: clamp(3rem, 9vw, 5rem);
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+}
+
+.colophon p {
+  margin: 0;
+}
+
+/* drawably layers an aria-hidden SVG under each control; keep stacking sane. */
+.drawably-card {
+  padding: 1.5rem;
+}
