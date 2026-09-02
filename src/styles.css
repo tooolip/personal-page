@@ -312,49 +312,68 @@ hr {
   margin: clamp(2rem, 6vw, 3rem) 0;
 }
 
-/* Blocks */
-.block {
-  margin: clamp(2rem, 6vw, 3rem) 0;
-}
-
-.block h2 {
-  font-family: var(--pen);
-  font-weight: 400;
-  font-size: 1.6rem;
-  margin: 0 0 0.5em;
-}
-
-.block p {
-  margin: 0 0 1em;
-  text-wrap: pretty;
-}
-
-#work-list {
+/* Link list. Whole rows are the tap target, so the marker and handle are
+   reachable too, not just the service name. */
+.link-list {
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
-#work-list li {
-  margin: 0 0 0.6em;
+.link-list li {
+  margin: 0;
 }
 
-/* Links get a pen underline on hover rather than a browser rule. */
-a {
+.link-list a {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Row height comes from line-height rather than padding on the anchor.
+   drawably places each marker against the <li> box, so padding would push the
+   text down away from its own dash. This keeps a ~48px tap target and leaves
+   the marker sitting on the text. */
+.link-name {
+  font-family: var(--pen);
+  font-size: 1.45rem;
+  line-height: 2.1;
+}
+
+.link-handle {
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+  text-align: right;
+}
+
+.link-list a:hover .link-name,
+.link-list a:focus-visible .link-name {
+  color: var(--ink);
+}
+
+.link-list a:hover .link-handle,
+.link-list a:focus-visible .link-handle {
+  color: var(--ink);
+}
+
+.link-list a:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 4px;
+}
+
+/* The colophon link keeps a quiet rule; the list rows don't need one. */
+.colophon a {
   color: inherit;
   text-decoration-color: var(--rule);
   text-underline-offset: 0.22em;
   text-decoration-thickness: 1px;
 }
 
-a:hover {
+.colophon a:hover {
   text-decoration-color: currentColor;
-}
-
-.links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.25rem;
 }
 
 .colophon {
