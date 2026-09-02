@@ -21,8 +21,12 @@
       <main class="sheet">
         <div class="theme-row">
           <label class="theme-toggle">
-            <span class="theme-toggle-text">dark</span>
-            <span class="theme-toggle-track"><input type="checkbox" /></span>
+            <span class="theme-icon-slot" data-icon="sun"></span>
+            <span class="theme-toggle-track">
+              <!-- The icons are decorative, so the name lives on the input. -->
+              <input type="checkbox" aria-label="Dark mode" />
+            </span>
+            <span class="theme-icon-slot" data-icon="moon"></span>
           </label>
         </div>
 

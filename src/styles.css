@@ -100,14 +100,54 @@ body {
   user-select: none;
 }
 
-.theme-toggle-text {
-  font-family: var(--pen);
-  font-size: 1.05rem;
-  color: var(--ink-soft);
+.theme-icon-slot {
+  display: inline-flex;
+  flex: none;
+  line-height: 0;
 }
 
-.theme-toggle:hover .theme-toggle-text {
-  color: var(--ink);
+.theme-toggle-track {
+  flex: none;
+}
+
+/* Whichever side the toggle is on reads full strength; the other recedes.
+   Keyed off the checkbox, not data-theme, because with no stored choice
+   there is no data-theme to read. */
+.theme-toggle .theme-icon {
+  width: 1.15rem;
+  height: 1.15rem;
+  opacity: 0.35;
+  transition: opacity 160ms ease;
+}
+
+.theme-toggle:has(input:not(:checked)) .theme-icon-sun,
+.theme-toggle:has(input:checked) .theme-icon-moon {
+  opacity: 1;
+}
+
+/* .drawably-svg path is fill:none; the moon is a solid crescent. */
+.theme-toggle .theme-icon .moon-body {
+  fill: var(--drawably-stroke);
+  stroke: none;
+}
+
+/* SVG masks compute luminance in linearRGB by default, which renders the
+   kept region at roughly half strength -- an ink crescent came out grey.
+   sRGB makes white mean fully opaque. */
+.theme-toggle .theme-icon mask {
+  color-interpolation: sRGB;
+}
+
+/* The .moon-body rule above also reaches inside <mask>, where an unfilled path
+   cuts nothing. Mask luminance only cares about black vs white, so be explicit. */
+.theme-toggle .theme-icon mask rect {
+  fill: #fff;
+  stroke: none;
+}
+
+.theme-toggle .theme-icon mask path {
+  fill: #000;
+  stroke: none;
 }
 
 /* Masthead */
@@ -149,18 +189,22 @@ body {
 }
 
 /* .drawably-svg is built to sit *under* a real control: absolute, inset 0,
-   z-index -1. The portrait is a standalone drawing, so undo that layout while
-   keeping the class for its boil animation and reduced-motion handling.
-   Two classes, so this outranks the library's single-class rule. */
-.portrait .portrait-svg {
+   z-index -1. These are standalone drawings, so undo that layout while keeping
+   the class for its boil animation and reduced-motion handling.
+   Two classes each, so these outrank the library's single-class rule. */
+.portrait .portrait-svg,
+.theme-toggle .theme-icon {
   position: static;
   inset: auto;
   z-index: auto;
   pointer-events: auto;
   display: block;
+  overflow: visible;
+}
+
+.portrait .portrait-svg {
   width: 100%;
   height: auto;
-  overflow: visible;
 }
 
 .portrait-svg .drawably-boil {
