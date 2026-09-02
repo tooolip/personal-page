@@ -364,28 +364,6 @@ hr {
   outline-offset: 4px;
 }
 
-/* The colophon link keeps a quiet rule; the list rows don't need one. */
-.colophon a {
-  color: inherit;
-  text-decoration-color: var(--rule);
-  text-underline-offset: 0.22em;
-  text-decoration-thickness: 1px;
-}
-
-.colophon a:hover {
-  text-decoration-color: currentColor;
-}
-
-.colophon {
-  margin-top: clamp(3rem, 9vw, 5rem);
-  font-size: 0.9rem;
-  color: var(--ink-soft);
-}
-
-.colophon p {
-  margin: 0;
-}
-
 /* drawably layers an aria-hidden SVG under each control; keep stacking sane. */
 .drawably-card {
   padding: 1.5rem;

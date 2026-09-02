@@ -28,6 +28,3 @@ sketch<HTMLElement>(".portrait", drawPortrait);
 sketch<HTMLElement>("#rule-1", (el) => drawablyDivider(el, { boil: BOIL }));
 sketch<HTMLElement>("#link-list", (el) => drawablyList(el, { marker: "dash", boil: BOIL }));
 
-
-const year = document.querySelector("#year");
-if (year) year.textContent = String(new Date().getFullYear());
