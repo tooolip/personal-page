@@ -1,6 +1,7 @@
 import { drawablyDivider, drawablyList, drawablyUnderline } from "drawably";
 import { drawPortrait } from "./portrait.ts";
 import { initTheme } from "./theme.ts";
+import { BOIL } from "./motion.ts";
 import "drawably/style.css";
 import "drawably/font.css";
 
@@ -24,12 +25,12 @@ function sketch<T extends Element>(
 
 sketch<HTMLElement>(".theme-toggle-track", initTheme);
 sketch<HTMLElement>(".portrait", drawPortrait);
-sketch<HTMLElement>("#rule-1", (el) => drawablyDivider(el));
-sketch<HTMLElement>("#work-list", (el) => drawablyList(el, { marker: "dash" }));
+sketch<HTMLElement>("#rule-1", (el) => drawablyDivider(el, { boil: BOIL }));
+sketch<HTMLElement>("#work-list", (el) => drawablyList(el, { marker: "dash", boil: BOIL }));
 
 for (const el of document.querySelectorAll<HTMLElement>('[data-sketch="underline"]')) {
   try {
-    drawablyUnderline(el);
+    drawablyUnderline(el, { boil: BOIL });
   } catch (err) {
     console.warn("drawably: could not underline", err);
   }

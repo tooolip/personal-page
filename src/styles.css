@@ -85,6 +85,17 @@ body {
   margin: 0 auto;
 }
 
+/* Boil speed. drawably cycles its three frames at 1200ms; this shortens the
+   whole page's shimmer. Amplitude is BOIL in motion.ts.
+
+   Scoped to no-preference so it can never reintroduce motion the library's own
+   reduced-motion rule just switched off. */
+@media (prefers-reduced-motion: no-preference) {
+  .sheet .drawably-svg {
+    animation-duration: 700ms;
+  }
+}
+
 /* Theme toggle */
 .theme-row {
   display: flex;

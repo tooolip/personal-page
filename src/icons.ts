@@ -1,5 +1,6 @@
 import { randomSeed, roughCircle, roughLine, variants } from "drawably";
 import type { RoughOptions } from "drawably";
+import { BOIL } from "./motion.ts";
 
 const SVG_NS = "http://www.w3.org/2000/svg";
 const BOX = 24;
@@ -49,7 +50,7 @@ function shell(label: string): SVGSVGElement {
 }
 
 function boiled(gen: (o: RoughOptions) => string, seed: number): string[] {
-  return variants(gen, { seed, roughness: 0.7, boil: 0.35 });
+  return variants(gen, { seed, roughness: 0.7, boil: BOIL });
 }
 
 export function renderSun(mount: HTMLElement): void {

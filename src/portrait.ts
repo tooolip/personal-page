@@ -1,4 +1,5 @@
 import { randomSeed, roughEllipse, variants } from "drawably";
+import { BOIL } from "./motion.ts";
 
 const SVG_NS = "http://www.w3.org/2000/svg";
 
@@ -70,7 +71,7 @@ export function drawPortrait(figure: HTMLElement): void {
   // Three frames of the same ring, cycled by drawably's CSS.
   const frames = variants(
     (o) => roughEllipse(CX, CY, RING_RX, RING_RY, o),
-    { seed, roughness: 1, boil: 0.4 },
+    { seed, roughness: 1, boil: BOIL },
   );
   frames.forEach((d, i) => {
     svg.appendChild(

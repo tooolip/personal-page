@@ -1,5 +1,6 @@
 import { drawablyToggle } from "drawably";
 import { renderMoon, renderSun } from "./icons.ts";
+import { BOIL } from "./motion.ts";
 
 const KEY = "theme";
 type Theme = "light" | "dark";
@@ -40,7 +41,7 @@ export function initTheme(wrap: HTMLElement): void {
   input.checked = choice ? choice === "dark" : media.matches;
   if (choice) document.documentElement.dataset.theme = choice;
 
-  drawablyToggle(wrap);
+  drawablyToggle(wrap, { boil: BOIL });
 
   const label = wrap.closest(".theme-toggle");
   const sun = label?.querySelector<HTMLElement>('[data-icon="sun"]');
