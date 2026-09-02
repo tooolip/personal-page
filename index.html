@@ -17,6 +17,38 @@
     <script type="module" src="./src/main.ts"></script>
   </head>
   <body>
+    <!-- The pen font is a static TrueType, so its glyphs can't boil the way the
+         SVG sketches do; displacing them with a different turbulence seed each
+         frame is what makes the words move. Two sets because displacement has
+         to scale with type size -- 2.2px reads as a wobble on the 68px name and
+         as mush on a 26px heading. sRGB stops the filter shifting colour. -->
+    <svg class="boil-defs" aria-hidden="true" focusable="false">
+      <filter id="pen-boil-lg-0" x="-8%" y="-8%" width="116%" height="116%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency="0.08" numOctaves="2" seed="1" result="n" />
+        <feDisplacementMap in="SourceGraphic" in2="n" scale="2.2" xChannelSelector="R" yChannelSelector="G" />
+      </filter>
+      <filter id="pen-boil-lg-1" x="-8%" y="-8%" width="116%" height="116%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency="0.08" numOctaves="2" seed="2" result="n" />
+        <feDisplacementMap in="SourceGraphic" in2="n" scale="2.2" xChannelSelector="R" yChannelSelector="G" />
+      </filter>
+      <filter id="pen-boil-lg-2" x="-8%" y="-8%" width="116%" height="116%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency="0.08" numOctaves="2" seed="3" result="n" />
+        <feDisplacementMap in="SourceGraphic" in2="n" scale="2.2" xChannelSelector="R" yChannelSelector="G" />
+      </filter>
+      <filter id="pen-boil-sm-0" x="-8%" y="-8%" width="116%" height="116%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency="0.08" numOctaves="2" seed="1" result="n" />
+        <feDisplacementMap in="SourceGraphic" in2="n" scale="1.1" xChannelSelector="R" yChannelSelector="G" />
+      </filter>
+      <filter id="pen-boil-sm-1" x="-8%" y="-8%" width="116%" height="116%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency="0.08" numOctaves="2" seed="2" result="n" />
+        <feDisplacementMap in="SourceGraphic" in2="n" scale="1.1" xChannelSelector="R" yChannelSelector="G" />
+      </filter>
+      <filter id="pen-boil-sm-2" x="-8%" y="-8%" width="116%" height="116%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency="0.08" numOctaves="2" seed="3" result="n" />
+        <feDisplacementMap in="SourceGraphic" in2="n" scale="1.1" xChannelSelector="R" yChannelSelector="G" />
+      </filter>
+    </svg>
+
     <div class="paper">
       <main class="sheet">
         <div class="theme-row">

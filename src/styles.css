@@ -169,6 +169,61 @@ body {
   stroke: none;
 }
 
+/* Boiling text.
+
+   The sketches boil by swapping three pre-drawn paths; a TrueType can't do
+   that, so the words get displaced by a different turbulence seed each frame.
+   step-end never interpolates between the url()s, and the 700ms cycle matches
+   the pen lines, so words and drawings move together. */
+.boil-defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+.name {
+  filter: url(#pen-boil-lg-0);
+}
+
+.block h2 {
+  filter: url(#pen-boil-sm-0);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .name {
+    animation: pen-boil-lg 700ms step-end infinite;
+  }
+
+  .block h2 {
+    animation: pen-boil-sm 700ms step-end infinite;
+  }
+}
+
+@keyframes pen-boil-lg {
+  0% {
+    filter: url(#pen-boil-lg-0);
+  }
+  33.33% {
+    filter: url(#pen-boil-lg-1);
+  }
+  66.67% {
+    filter: url(#pen-boil-lg-2);
+  }
+}
+
+@keyframes pen-boil-sm {
+  0% {
+    filter: url(#pen-boil-sm-0);
+  }
+  33.33% {
+    filter: url(#pen-boil-sm-1);
+  }
+  66.67% {
+    filter: url(#pen-boil-sm-2);
+  }
+}
+
 /* Masthead */
 .masthead {
   display: flex;
