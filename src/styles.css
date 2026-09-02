@@ -125,6 +125,14 @@ body {
   opacity: 1;
 }
 
+/* drawably already freezes its own boil here; the crossfade is motion we
+   added on top, so it has to go too. */
+@media (prefers-reduced-motion: reduce) {
+  .theme-toggle .theme-icon {
+    transition: none;
+  }
+}
+
 /* .drawably-svg path is fill:none; the moon is a solid crescent. */
 .theme-toggle .theme-icon .moon-body {
   fill: var(--drawably-stroke);
