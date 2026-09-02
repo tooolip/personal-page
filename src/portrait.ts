@@ -10,12 +10,12 @@ const H = 330;
 const CX = W / 2;
 const CY = H / 2;
 
-// The photo is clipped a few px inside the pen ring, so the ring reads as a
-// frame drawn around it rather than a line cutting across the edge.
-const CLIP_RX = 114;
-const CLIP_RY = 148;
-const RING_RX = 118;
-const RING_RY = 152;
+// Clip and ring share radii and seed, so the photo's edge lands underneath the
+// pen stroke instead of short of it. Nothing of the page shows through inside
+// the frame, and the 2.5px stroke hides the cut from both sides -- the boil
+// only carries the line +/-BOIL, which is well inside half a stroke width.
+const RX = 118;
+const RY = 152;
 
 function el<K extends keyof SVGElementTagNameMap>(
   name: K,
@@ -52,7 +52,7 @@ export function drawPortrait(figure: HTMLElement): void {
   const defs = el("defs", {});
   const clip = el("clipPath", { id: clipId });
   clip.appendChild(
-    el("path", { d: roughEllipse(CX, CY, CLIP_RX, CLIP_RY, { seed, roughness: 1 }) }),
+    el("path", { d: roughEllipse(CX, CY, RX, RY, { seed, roughness: 1 }) }),
   );
   defs.appendChild(clip);
   svg.appendChild(defs);
@@ -70,7 +70,7 @@ export function drawPortrait(figure: HTMLElement): void {
 
   // Three frames of the same ring, cycled by drawably's CSS.
   const frames = variants(
-    (o) => roughEllipse(CX, CY, RING_RX, RING_RY, o),
+    (o) => roughEllipse(CX, CY, RX, RY, o),
     { seed, roughness: 1, boil: BOIL },
   );
   frames.forEach((d, i) => {
