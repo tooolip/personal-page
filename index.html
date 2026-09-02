@@ -66,8 +66,14 @@
           <div class="masthead-text">
             <h1 class="name">Audrey Schickler</h1>
           </div>
-          <!-- CSS rounds this to a clean oval on its own; src/portrait.ts
-               upgrades it to a rough-clipped photo inside a boiling pen ring. -->
+          <!-- Portrait is off. Uncomment this block to bring it back; nothing
+               else needs changing. src/portrait.ts, its styles and the image
+               all stay in the repo, and main.ts still looks for .portrait and
+               quietly skips it while this is commented out.
+
+               It lives in a comment rather than behind a CSS/JS flag so the
+               browser never downloads the photo while it's switched off.
+
           <figure class="portrait">
             <img
               class="portrait-src"
@@ -77,6 +83,7 @@
               height="660"
             />
           </figure>
+          -->
         </header>
 
         <hr id="rule-1" />
