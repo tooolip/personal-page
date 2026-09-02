@@ -7,11 +7,25 @@
     <meta name="description" content="Personal site of Audrey Schickler." />
     <link rel="icon" href="./src/favicon.svg" />
     <link rel="stylesheet" href="./src/styles.css" />
+    <script>
+      // Runs before paint so a stored choice never flashes the other theme.
+      try {
+        var t = localStorage.getItem("theme");
+        if (t === "light" || t === "dark") document.documentElement.dataset.theme = t;
+      } catch (e) {}
+    </script>
     <script type="module" src="./src/main.ts"></script>
   </head>
   <body>
     <div class="paper">
       <main class="sheet">
+        <div class="theme-row">
+          <label class="theme-toggle">
+            <span class="theme-toggle-text">dark</span>
+            <span class="theme-toggle-track"><input type="checkbox" /></span>
+          </label>
+        </div>
+
         <header class="masthead">
           <div class="masthead-text">
             <h1 class="name">Audrey Schickler</h1>

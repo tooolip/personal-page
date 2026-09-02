@@ -1,33 +1,34 @@
 /* Paper theme. drawably draws the chrome; this file sets the surface it sits on. */
 
+/* Every colour is declared once as light-dark(light, dark); which half
+   applies is decided purely by color-scheme, so the toggle only has to flip
+   that one property. Dark is toned paper, never a glaring white sheet. */
 :root {
-  /* Ink + paper. drawably reads these custom properties directly. */
-  --drawably-stroke: #27354d;
-  --drawably-fill: #27354d;
-  --drawably-paper: #fbf7ec;
+  color-scheme: light dark;
 
-  --ink: #27354d;
-  --ink-soft: #5d6a80;
-  --paper: #fbf7ec;
-  --rule: rgba(39, 53, 77, 0.14);
+  /* Ink + paper. drawably reads these custom properties directly. */
+  --drawably-stroke: light-dark(#27354d, #e8dfc9);
+  --drawably-fill: light-dark(#27354d, #e8dfc9);
+  --drawably-paper: light-dark(#fbf7ec, #22201c);
+
+  --ink: light-dark(#27354d, #e8dfc9);
+  --ink-soft: light-dark(#5d6a80, #a89f8b);
+  --paper: light-dark(#fbf7ec, #22201c);
+  --rule: light-dark(rgba(39, 53, 77, 0.14), rgba(232, 223, 201, 0.16));
 
   --measure: 34rem;
   --pen: "Drawably Pen", ui-rounded, "Comic Sans MS", cursive;
   --body: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
 }
 
-/* Toned paper rather than a glaring white sheet at night. */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --drawably-stroke: #e8dfc9;
-    --drawably-fill: #e8dfc9;
-    --drawably-paper: #22201c;
+/* No data-theme at all means "follow the system". The toggle sets one of
+   these, which pins color-scheme and so pins every light-dark() above. */
+:root[data-theme="light"] {
+  color-scheme: light;
+}
 
-    --ink: #e8dfc9;
-    --ink-soft: #a89f8b;
-    --paper: #22201c;
-    --rule: rgba(232, 223, 201, 0.16);
-  }
+:root[data-theme="dark"] {
+  color-scheme: dark;
 }
 
 *,
@@ -64,11 +65,17 @@ body {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.22'/%3E%3C/svg%3E");
 }
 
+/* Blend mode isn't a colour, so this one can't ride on light-dark(). */
 @media (prefers-color-scheme: dark) {
-  .paper::before {
+  :root:not([data-theme="light"]) .paper::before {
     mix-blend-mode: screen;
     opacity: 0.28;
   }
+}
+
+:root[data-theme="dark"] .paper::before {
+  mix-blend-mode: screen;
+  opacity: 0.28;
 }
 
 .sheet {
@@ -76,6 +83,31 @@ body {
   z-index: 1;
   max-width: var(--measure);
   margin: 0 auto;
+}
+
+/* Theme toggle */
+.theme-row {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: clamp(1rem, 4vw, 2rem);
+}
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.theme-toggle-text {
+  font-family: var(--pen);
+  font-size: 1.05rem;
+  color: var(--ink-soft);
+}
+
+.theme-toggle:hover .theme-toggle-text {
+  color: var(--ink);
 }
 
 /* Masthead */
