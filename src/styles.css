@@ -312,56 +312,107 @@ hr {
   margin: clamp(2rem, 6vw, 3rem) 0;
 }
 
-/* Link list. Whole rows are the tap target, so the marker and handle are
-   reachable too, not just the service name. */
-.link-list {
-  margin: 0;
-  padding: 0;
-  list-style: none;
+/* Scattered charms.
+
+   Slots are hand-placed rather than random so nothing collides or drifts off
+   the edge; charms.ts adds a small per-load tilt and nudge on top, which is
+   what stops it reading as a grid. */
+.charms {
+  position: relative;
+  min-height: clamp(23rem, 64vw, 30rem);
+  margin: clamp(1.5rem, 5vw, 2.5rem) 0 0;
 }
 
-.link-list li {
-  margin: 0;
-}
-
-.link-list a {
+.charm {
+  position: absolute;
+  width: clamp(4.6rem, 17vw, 6.2rem);
   display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 1rem;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
   text-decoration: none;
   color: inherit;
+  transform: translate(calc(-50% + var(--dx, 0px)), calc(-50% + var(--dy, 0px)))
+    rotate(var(--rot, 0deg));
 }
 
-/* Row height comes from line-height rather than padding on the anchor.
-   drawably places each marker against the <li> box, so padding would push the
-   text down away from its own dash. This keeps a ~48px tap target and leaves
-   the marker sitting on the text. */
-.link-name {
+.charm:nth-child(1) { left: 17%; top: 14%; }
+.charm:nth-child(2) { left: 66%; top: 10%; }
+.charm:nth-child(3) { left: 40%; top: 44%; }
+.charm:nth-child(4) { left: 84%; top: 39%; }
+.charm:nth-child(5) { left: 14%; top: 70%; }
+.charm:nth-child(6) { left: 64%; top: 80%; }
+
+.charm-art {
+  display: block;
+  width: 100%;
+  transition: transform 180ms ease;
+}
+
+.charm:hover .charm-art,
+.charm:focus-visible .charm-art {
+  transform: scale(1.12) rotate(-3deg);
+}
+
+/* Two classes, or .drawably-svg's own width/height/position win. */
+.charms .charm-svg {
+  position: static;
+  inset: auto;
+  z-index: auto;
+  pointer-events: auto;
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+/* Hidden by opacity, not display, so it stays the link's accessible name. */
+.charm-label {
   font-family: var(--pen);
-  font-size: 1.45rem;
-  line-height: 2.1;
-}
-
-.link-handle {
-  color: var(--ink-soft);
   font-size: 0.95rem;
-  text-align: right;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 140ms ease;
 }
 
-.link-list a:hover .link-name,
-.link-list a:focus-visible .link-name {
-  color: var(--ink);
+.charm:hover .charm-label,
+.charm:focus-visible .charm-label {
+  opacity: 1;
 }
 
-.link-list a:hover .link-handle,
-.link-list a:focus-visible .link-handle {
-  color: var(--ink);
-}
-
-.link-list a:focus-visible {
+.charm:focus-visible {
   outline: 2px solid var(--ink);
-  outline-offset: 4px;
+  outline-offset: 6px;
+  border-radius: 4px;
+}
+
+/* A phone is too narrow for the full spread: the labels are wider than the
+   charms, so the outer slots have to come in or they clip at the edges. */
+@media (max-width: 32rem) {
+  .charms {
+    min-height: 30rem;
+  }
+
+  .charm:nth-child(1) { left: 28%; top: 11%; }
+  .charm:nth-child(2) { left: 71%; top: 15%; }
+  .charm:nth-child(3) { left: 34%; top: 42%; }
+  .charm:nth-child(4) { left: 72%; top: 50%; }
+  .charm:nth-child(5) { left: 30%; top: 73%; }
+  .charm:nth-child(6) { left: 66%; top: 84%; }
+}
+
+/* Nothing hovers on a touch screen, so the labels just stay up. */
+@media (hover: none) {
+  .charm-label {
+    opacity: 0.7;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .charm-art,
+  .charm-label {
+    transition: none;
+  }
 }
 
 /* drawably layers an aria-hidden SVG under each control; keep stacking sane. */

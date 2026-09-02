@@ -1,7 +1,6 @@
 import { randomSeed, roughEllipse, variants } from "drawably";
 import { BOIL } from "./motion.ts";
-
-const SVG_NS = "http://www.w3.org/2000/svg";
+import { el } from "./svg.ts";
 
 // The oval's own coordinate space. The SVG scales via viewBox, so these stay
 // fixed no matter how wide the figure renders.
@@ -16,15 +15,6 @@ const CY = H / 2;
 // only carries the line +/-BOIL, which is well inside half a stroke width.
 const RX = 118;
 const RY = 152;
-
-function el<K extends keyof SVGElementTagNameMap>(
-  name: K,
-  attrs: Record<string, string>,
-): SVGElementTagNameMap[K] {
-  const node = document.createElementNS(SVG_NS, name);
-  for (const [k, v] of Object.entries(attrs)) node.setAttribute(k, v);
-  return node;
-}
 
 /**
  * Swap the plain <img> for a hand-drawn oval: the photo clipped to a rough

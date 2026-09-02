@@ -81,47 +81,35 @@
 
         <hr id="rule-1" />
 
-        <nav aria-label="Profiles elsewhere">
-          <ul id="link-list" class="link-list">
-            <li>
-              <a href="https://www.are.na/audrey-schickler/channels" rel="me noopener">
-                <span class="link-name">Are.na</span>
-                <span class="link-handle">audrey-schickler</span>
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/rndmgl" rel="me noopener">
-                <span class="link-name">X</span>
-                <span class="link-handle">@rndmgl</span>
-              </a>
-            </li>
-            <li>
-              <a href="https://github.com/tooolip" rel="me noopener">
-                <span class="link-name">GitHub</span>
-                <span class="link-handle">tooolip</span>
-              </a>
-            </li>
-            <li>
-              <a href="https://app.thestorygraph.com/profile/prettyauds" rel="me noopener">
-                <span class="link-name">StoryGraph</span>
-                <span class="link-handle">prettyauds</span>
-              </a>
-            </li>
-            <li>
-              <a href="https://letterboxd.com/prettyauds/" rel="me noopener">
-                <span class="link-name">Letterboxd</span>
-                <span class="link-handle">prettyauds</span>
-              </a>
-            </li>
-            <li>
-              <a href="https://backloggd.com/u/prettyaud/" rel="me noopener">
-                <span class="link-name">Backloggd</span>
-                <span class="link-handle">prettyaud</span>
-              </a>
-            </li>
-          </ul>
+        <!-- Positions live in CSS so the scatter survives without JS;
+             charms.ts draws the doodles and adds the per-load tilt. The label
+             is only visually hidden, so it is still the link's name. -->
+        <nav class="charms" id="charms" aria-label="Profiles elsewhere">
+          <a class="charm" data-charm="arena" href="https://www.are.na/audrey-schickler/channels" rel="me noopener">
+            <span class="charm-art"></span>
+            <span class="charm-label">Are.na</span>
+          </a>
+          <a class="charm" data-charm="x" href="https://x.com/rndmgl" rel="me noopener">
+            <span class="charm-art"></span>
+            <span class="charm-label">X</span>
+          </a>
+          <a class="charm" data-charm="github" href="https://github.com/tooolip" rel="me noopener">
+            <span class="charm-art"></span>
+            <span class="charm-label">GitHub</span>
+          </a>
+          <a class="charm" data-charm="storygraph" href="https://app.thestorygraph.com/profile/prettyauds" rel="me noopener">
+            <span class="charm-art"></span>
+            <span class="charm-label">StoryGraph</span>
+          </a>
+          <a class="charm" data-charm="letterboxd" href="https://letterboxd.com/prettyauds/" rel="me noopener">
+            <span class="charm-art"></span>
+            <span class="charm-label">Letterboxd</span>
+          </a>
+          <a class="charm" data-charm="backloggd" href="https://backloggd.com/u/prettyaud/" rel="me noopener">
+            <span class="charm-art"></span>
+            <span class="charm-label">Backloggd</span>
+          </a>
         </nav>
-
       </main>
     </div>
   </body>

@@ -1,5 +1,6 @@
-import { drawablyDivider, drawablyList } from "drawably";
+import { drawablyDivider } from "drawably";
 import { drawPortrait } from "./portrait.ts";
+import { renderCharms } from "./charms.ts";
 import { initTheme } from "./theme.ts";
 import { BOIL } from "./motion.ts";
 import "drawably/style.css";
@@ -26,5 +27,5 @@ function sketch<T extends Element>(
 sketch<HTMLElement>(".theme-toggle-track", initTheme);
 sketch<HTMLElement>(".portrait", drawPortrait);
 sketch<HTMLElement>("#rule-1", (el) => drawablyDivider(el, { boil: BOIL }));
-sketch<HTMLElement>("#link-list", (el) => drawablyList(el, { marker: "dash", boil: BOIL }));
+sketch<HTMLElement>("#charms", renderCharms);
 

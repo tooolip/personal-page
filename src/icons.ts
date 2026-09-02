@@ -1,18 +1,9 @@
 import { randomSeed, roughCircle, roughLine, variants } from "drawably";
 import type { RoughOptions } from "drawably";
 import { BOIL } from "./motion.ts";
+import { el } from "./svg.ts";
 
-const SVG_NS = "http://www.w3.org/2000/svg";
 const BOX = 24;
-
-function el<K extends keyof SVGElementTagNameMap>(
-  name: K,
-  attrs: Record<string, string>,
-): SVGElementTagNameMap[K] {
-  const node = document.createElementNS(SVG_NS, name);
-  for (const [k, v] of Object.entries(attrs)) node.setAttribute(k, v);
-  return node;
-}
 
 /** A disc with eight rays. Each ray gets its own seed so they don't repeat. */
 function sunPath(o: RoughOptions): string {
