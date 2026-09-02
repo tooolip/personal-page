@@ -1,4 +1,5 @@
 import { drawablyDivider, drawablyList, drawablyUnderline } from "drawably";
+import { drawPortrait } from "./portrait.ts";
 import "drawably/style.css";
 import "drawably/font.css";
 
@@ -20,6 +21,7 @@ function sketch<T extends Element>(
   }
 }
 
+sketch<HTMLElement>(".portrait", drawPortrait);
 sketch<HTMLElement>("#rule-1", (el) => drawablyDivider(el));
 sketch<HTMLElement>("#work-list", (el) => drawablyList(el, { marker: "dash" }));
 
