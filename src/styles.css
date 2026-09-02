@@ -401,13 +401,6 @@ hr {
   .charm:nth-child(6) { left: 66%; top: 84%; }
 }
 
-/* Nothing hovers on a touch screen, so the labels just stay up. */
-@media (hover: none) {
-  .charm-label {
-    opacity: 0.7;
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
   .charm-art,
   .charm-label {
